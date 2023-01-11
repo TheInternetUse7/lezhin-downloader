@@ -1,18 +1,18 @@
-import requests, time, os, threading, shutil
+import requests, time, os, threading, shutil, sys
 from PIL import Image
 
-FRIENDLY_NAME = 'suicideboy_en' # from the url bar
-START_CHAPTER = 1
-FINISH_CHAPTER = 71
-AUTO_CBZ = False # be warned this makes quite large files & is buggy as shit
-DELETE_ORIGINAL_FOLDER = False # only use if AUTO_CBZ is set to true
+FRIENDLY_NAME = f'{sys.argv[1]}' # from the url bar
+START_CHAPTER = int(sys.argv[2])
+FINISH_CHAPTER = int(sys.argv[3])
+AUTO_CBZ = True # be warned this makes quite large files & is buggy as shit
+DELETE_ORIGINAL_FOLDER = True # only use if AUTO_CBZ is set to true
 
 # ahem, please put ur cookies in here
 cookies = {
     'x-lz-locale': 'en_US',
-    'RSESSION': 'SDB0MUJFejdqbm9HK3RmbUlwZlpUYktUTHlwblo1cmFtem5oN1lqMjRaemwwZDBpUTEvTWJQQmlsVnV4ZGs0T3licUVac1NBRXVXV0IrNk1xRWpBdGFkcVVoRmREWGhlTXlRZDJ0T0Q4bHl5NWxFM3owRTFSZFBHdzFwWUF4Q0laSHhNdUJ6QitidytydG84MGxGdjRTQnZUdGxRWkFvdDZER2lpeUF0cFpxWC9rdHcxOFNiZytNWG9palU4Y2l6YTFJaDhyTUFBay9wMUFrVWsrWFRiSC9iRlpNdWVCalgxbURNOGxXYjhCYXhqNysyZVBZeFQvY0VIWFNYTkdGNVdodnBGUkRxU0ZCdVExOStKRG00SzZYU2hKY2JpK0x6bGNrRHIxdnl0L0M2ZG5jdkNYdjVOK1ZIU3h5aU4rSnNMTzl4VElIZlVta1ZleGJSVzI2aGFsZE14Mklra2RHMWJaRm5OcFJ2M0xrWWI3R3dzQnRuRHVvTXZ4WUIveGZOLS1hdFNGbUpmOFBrbkRCVUhJT3lLUE1BPT0%3D--1cacebd2ea588deae0781cc8068f2408519cb67f',
-    'JSESSIONID': 'L7h36iCTCEuFk8oR9d8mEg',
-    'cc': '0KRervkJBo5v_zFfbdV2BRgCC-dJqPFrtFME1cN5GA4dRV4j5IYbjdk0EBShXGmrQsbEJckIs8Eo6RQFWex8sqyarkBvX5g9fXxkQzcbUJFx_3Is8pgSvoxEz7TR_UPw',
+    'RSESSION': '',
+    'JSESSIONID': '',
+    'cc': '',
 }
 
 headers = {
@@ -22,9 +22,9 @@ headers = {
     'Cache-Control': 'no-cache',
     'X-LZ-Locale': 'en-US',
     'X-LZ-AllowAdult': 'true',
-    'X-LZ-Adult': '0',
+    'X-LZ-Adult': '2',
     'X-LZ-Country': 'gb',
-    'Authorization': 'Bearer 1d4691ef-3c47-48fd-979d-b5e1b3121365', # change me!! this is prob dead
+    'Authorization': 'Bearer 438d61c7-6871-4199-b62f-20005365b70a', # change me!! this is prob dead
     'Connection': 'keep-alive',
     'Referer': f'https://www.lezhinus.com/en/comic/{FRIENDLY_NAME}/1',
     'Sec-Fetch-Dest': 'empty',
@@ -39,7 +39,7 @@ def get_ep_id(FRIENDLY_NAME, ep):
     params = {
         'platform': 'web',
         'store': 'web',
-        'alias': 'suicideboy_en',
+        'alias': f'{sys.argv[1]}',
         'name': str(ep),
         'preload': 'false',
         'type': 'comic_episode',
@@ -132,5 +132,3 @@ def scrape(num):
 
 for i in range(START_CHAPTER, FINISH_CHAPTER + 1): # cuz range
     scrape(i)
-
-    
