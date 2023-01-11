@@ -8,7 +8,7 @@ uhh if you somehow ended up here, you are in the wrong place. check out main rep
 - Install the requirements
 `pip install -r requirements.txt` i think?
 - Edit config in `scrape.py`
-- Insert your session cookies + bearer token
+- Insert your session cookies + bearer token (you can skip session cookies)
 - run `python scrape.py [comic name from the url bar] [start chapter: int] [finish chapter: int]`
 ________________
 
